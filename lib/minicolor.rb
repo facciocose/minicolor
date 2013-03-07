@@ -38,9 +38,9 @@ module Minicolor
     end
 
     def complementary(n = 2)
+      output = [self]
       h, s, l = @hsl
       hi = 1.0 / n
-      output = [Color.new(hsl_to_rgb(h, s, l))]
       (n - 1).times do |i|
         ht = h + hi * (i + 1)
         ht -= 1 if ht > 1

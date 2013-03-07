@@ -1,4 +1,4 @@
-require 'minicolor'
+require_relative 'lib/minicolor'
 require 'test/unit'
 
 class TestColor < Test::Unit::TestCase
@@ -21,11 +21,10 @@ class TestColor < Test::Unit::TestCase
     white = c.luminance
     c = Minicolor::Color.new('000')
     black = c.luminance
-    c = Minicolor::Color.new('808080')
-    grey = c.luminance
+    
+    # TODO add some intermediate values
 
-    assert_equal(white, 1.0)
-    assert_equal(black, 0.0)
-    assert_equal(grey, 0.5)
+    assert_equal(1.0, white)
+    assert_equal(0.0, black)
   end
 end
