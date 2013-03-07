@@ -89,7 +89,7 @@ module Minicolor
 
     private
 
-    # returns the hsl values of the colo
+    # returns the hsl values of the color
     def to_hsl
       # normalized rgb
       rgb = @rgb.collect { |x| x / 255.0 }
@@ -122,7 +122,7 @@ module Minicolor
       [h, s, l]
     end
 
-    # converst rgb to hsl
+    # convert rgb to hsl
     # TODO refactor the class and remove this function
     def hsl_to_rgb(h, s, l)
       if s == 0
