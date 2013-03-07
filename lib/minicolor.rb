@@ -1,5 +1,9 @@
+# Minimal color management module
 module Minicolor
+  # This class defines a color object and it's color manipulation functions
   class Color
+    # Initialize with an hex color string or with an [r, g, b] array
+    # if null returns a random color
     def initialize(color = nil)
       if color =~ /^([a-fA-F0-9]{3}){1,2}$/
         if color.size == 3
@@ -22,10 +26,12 @@ module Minicolor
       @hsl = to_hsl
     end
 
+    # converts hex value to rgb array
     def to_rgb
       @hex.scan(/[a-fA-F0-9]{2}/).collect { |x| x.hex }
     end
 
+    # converts rgb array to hex string
     def to_hex
       output = ''
       @rgb.each do |x|
@@ -36,7 +42,8 @@ module Minicolor
       end
       output
     end
-
+    
+    # returns an array of complementary colors
     def complementary(n = 2)
       output = [self]
       h, s, l = @hsl
@@ -49,6 +56,7 @@ module Minicolor
       output
     end
 
+    # returns an array of analogous colors
     def analogous(n)
       h, s, l = @hsl
       hd = 1.0 / 3.0
@@ -64,7 +72,9 @@ module Minicolor
       end
       output
     end
-
+    
+    # returns the luminance of the color
+    # TODO test the formula
     def luminance
       r, g, b = @rgb.collect do |x|
         x /= 255.0
@@ -79,6 +89,7 @@ module Minicolor
 
     private
 
+    # returns the hsl values of the colo
     def to_hsl
       # normalized rgb
       rgb = @rgb.collect { |x| x / 255.0 }
@@ -111,6 +122,8 @@ module Minicolor
       [h, s, l]
     end
 
+    # converst rgb to hsl
+    # TODO refactor the class and remove this function
     def hsl_to_rgb(h, s, l)
       if s == 0
         r, g, b = l * 255, l * 255, l * 255
@@ -128,6 +141,7 @@ module Minicolor
       [r.round, g.round, b.round]
     end
 
+    # function used in rgb to hsl conversion
     def hue_rgb(v1, v2, vh)
       vh += 1 if vh < 0
       vh -= 1 if vh > 1
