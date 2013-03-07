@@ -2,6 +2,8 @@
 module Minicolor
   # This class defines a color object and it's color manipulation functions
   class Color
+    attr_reader :rgb, :hex, :hsl
+    
     # Initialize with an hex color string or with an [r, g, b] array
     # if null returns a random color
     def initialize(color = nil)
@@ -26,23 +28,6 @@ module Minicolor
       @hsl = to_hsl
     end
 
-    # converts hex value to rgb array
-    def to_rgb
-      @hex.scan(/[a-fA-F0-9]{2}/).collect { |x| x.hex }
-    end
-
-    # converts rgb array to hex string
-    def to_hex
-      output = ''
-      @rgb.each do |x|
-        if x < 16
-          output << '0'
-        end
-        output << x.to_s(16)
-      end
-      output
-    end
-    
     # returns an array of complementary colors
     def complementary(n = 2)
       output = [self]
@@ -88,6 +73,23 @@ module Minicolor
     end
 
     private
+    
+    # converts hex value to rgb array
+    def to_rgb
+      @hex.scan(/[a-fA-F0-9]{2}/).collect { |x| x.hex }
+    end
+
+    # converts rgb array to hex string
+    def to_hex
+      output = ''
+      @rgb.each do |x|
+        if x < 16
+          output << '0'
+        end
+        output << x.to_s(16)
+      end
+      output
+    end
 
     # returns the hsl values of the color
     def to_hsl
