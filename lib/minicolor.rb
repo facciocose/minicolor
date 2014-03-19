@@ -1,6 +1,6 @@
 # Minimal color management module
 module Minicolor
-  # This class defines a color object and it's color manipulation functions
+  # This class defines a color object and its color manipulation functions
   class Color
     attr_reader :rgb, :hex, :hsl
     
